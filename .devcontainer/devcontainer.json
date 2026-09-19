@@ -1,0 +1,37 @@
+{
+  "name": "bft Dev",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+    "target": "development",
+    "args": {
+      "WORKDIR": "/workspaces/BFT"
+    }
+  },
+  "containerEnv": {
+    "DOTFILES_PROJECT_ROOT": "${containerWorkspaceFolder}"
+  },
+  "postCreateCommand": "uv sync --frozen --group qa",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "editor.formatOnSave": true,
+        "python.defaultInterpreterPath": "/opt/venv/bin/python",
+        "[python]": {
+          "editor.defaultFormatter": "charliermarsh.ruff",
+        }
+      },
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff",
+        "njpwerner.autodocstring",
+        "tamasfe.even-better-toml",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "remoteUser": "vscode",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/BFT,type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/BFT"
+}

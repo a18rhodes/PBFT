@@ -1,0 +1,49 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Distribution / Builds ---
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# --- Poetry / Virtual Environments ---
+# We commit pyproject.toml and poetry.lock to ensure reproducibility
+# But we NEVER commit the virtual environment itself.
+.venv/
+env/
+venv/
+
+# --- Testing & Code Quality ---
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# --- IDEs & Editors ---
+# Ignore local workspace settings, but keep shared extensions recommendations
+.vscode/*
+.cursor/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+.idea/
+*.swp
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+# --- Project Specific (c3d-mcp) ---
+# Internal working notes and design docs — not part of the shipped project.
+project_docs/
+*.log
+notes/*
+.claude/*
+
+# --- Private Injections (Dotfiles) ---
+# Ensure your private prompt rules never get committed
+.github/copilot-instructions.md
