@@ -47,3 +47,7 @@ notes/*
 # --- Private Injections (Dotfiles) ---
 # Ensure your private prompt rules never get committed
 .github/copilot-instructions.md
+
+# --- Devcontainer personal overrides ---
+# Machine-specific paths (signing socket, personal mounts) — never shared
+.devcontainer/personal/

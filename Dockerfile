@@ -33,9 +33,9 @@ FROM base AS dependencies
 COPY pyproject.toml uv.lock ./
 RUN uv sync --frozen --no-install-project --no-dev
 FROM dependencies AS development
+ARG UV_EXTRA_ARGS=""
 COPY . .
-RUN uv sync --frozen
-RUN git config --system --add safe.directory /workspaces/BFT \
+RUN uv sync --frozen ${UV_EXTRA_ARGS} \
     && chown -R vscode:vscode ${WORKDIR} /opt/venv
 USER vscode
 FROM dependencies AS production

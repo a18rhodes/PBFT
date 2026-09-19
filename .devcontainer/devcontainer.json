@@ -1,24 +1,27 @@
 {
-  "name": "bft Dev",
+  "name": "${localWorkspaceFolderBasename} Dev",
   "build": {
     "dockerfile": "../Dockerfile",
     "context": "..",
     "target": "development",
     "args": {
-      "WORKDIR": "/workspaces/BFT"
+      "WORKDIR": "/workspaces/${localWorkspaceFolderBasename}",
+      // Pass "--group qa" (or additional groups) to install dev/test deps at build time.
+      "UV_EXTRA_ARGS": "--group qa"
     }
   },
   "containerEnv": {
     "DOTFILES_PROJECT_ROOT": "${containerWorkspaceFolder}"
   },
-  "postCreateCommand": "uv sync --frozen --group qa",
+  // Add project-specific setup after the &&, e.g. "&& pre-commit install"
+  "postCreateCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
   "customizations": {
     "vscode": {
       "settings": {
         "editor.formatOnSave": true,
         "python.defaultInterpreterPath": "/opt/venv/bin/python",
         "[python]": {
-          "editor.defaultFormatter": "charliermarsh.ruff",
+          "editor.defaultFormatter": "charliermarsh.ruff"
         }
       },
       "extensions": [
@@ -32,6 +35,6 @@
     }
   },
   "remoteUser": "vscode",
-  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/BFT,type=bind,consistency=cached",
-  "workspaceFolder": "/workspaces/BFT"
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/${localWorkspaceFolderBasename},type=bind,consistency=cached",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
