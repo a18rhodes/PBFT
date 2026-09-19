@@ -35,11 +35,11 @@ RUN uv sync --frozen --no-install-project --no-dev
 FROM dependencies AS development
 COPY . .
 RUN uv sync --frozen
-RUN git config --system --add safe.directory /workspaces/c3d-mcp \
+RUN git config --system --add safe.directory /workspaces/BFT \
     && chown -R vscode:vscode ${WORKDIR} /opt/venv
 USER vscode
 FROM dependencies AS production
 ENV UV_COMPILE_BYTECODE=1
-COPY c3d_mcp/ ./c3d_mcp/
+COPY BFT ./BFT/
 COPY README.md ./
 RUN uv sync --frozen --no-dev --no-editable
